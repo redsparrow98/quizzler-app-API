@@ -4,12 +4,12 @@ import html
 
 
 class QuizBrain:
-
     def __init__(self, q_list):
         """
-        Initialises the Object with the number of the question being asked, sets the score to 0,
-        creates a question list using a parameter in a form of a dictionary.
-        Sets the current question to None as a start
+        - Initialises the Object with the number of the question being asked.
+        - sets the score to 0.
+        - creates a question list using a parameter in a form of a dictionary.
+        - Sets the current question to None as a start
 
         :param q_list: Database of questions being asked in the form of a dictionary. Received from API response
         """
@@ -19,6 +19,12 @@ class QuizBrain:
         self.current_question = None
 
     def still_has_questions(self):
+        """
+        - Checks if the question number is smaller than the questions_list database if true it means there are more
+        questions to go through and the quizz can keep playing
+
+        :return: True or False for more questions in a list
+        """
         return self.question_number < len(self.question_list)
 
     def next_question(self):
@@ -35,24 +41,19 @@ class QuizBrain:
         self.question_number += 1
         q_text = html.unescape(self.current_question.text)
         return f"Q.{self.question_number}: {q_text}"
-        # user_answer = input(f"Q.{self.question_number}: {q_text} (True/False): ")
-        # self.check_answer(user_answer)
 
     def check_answer(self, user_answer):
         """
         - Checks the User answer for the question against the correct answer in the Questions database.
-        - If right increases the score by 1 and lets user know
-        - If wrong lets user know
-        - displays the user score and question number at the end
+        - If right increases the score by 1 and return True
+        - If wrong return False
 
         :param user_answer: The user input After a question is asked
+        :return: True or False
         """
         correct_answer = self.current_question.answer
         if user_answer.lower() == correct_answer.lower():
             self.score += 1
-            print("You got it right!")
+            return True
         else:
-            print("That's wrong.")
-
-        print(f"Your current score is: {self.score}/{self.question_number}")
-        print("\n")
+            return False

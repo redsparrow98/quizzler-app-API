@@ -1,7 +1,7 @@
 import requests
 
 
-# asign the parameters for the quizz API
+# assign the parameters for the quizz API
 parameters = {
     "amount": 10,
     "type": "boolean"
@@ -14,5 +14,3 @@ data = response.json()["results"]
 
 # set the questions_data to be the data from the api
 question_data = data
-
-print(question_data)
