@@ -6,6 +6,7 @@ from ui import QuizzInterface
 # Creates an empty list
 question_bank = []
 
+
 # Iterates through the response data stored in the data.py retrieved from the API
 # Takes out only the question and correct_answer keys and assigns them to variables.
 # Passes the variables as a new question object using the Question class
